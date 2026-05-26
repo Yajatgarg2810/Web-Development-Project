@@ -1,0 +1,352 @@
+<!-- search.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaidConnect - Search Workers</title>
+    <style>
+        :root {
+            --primary: #8a2be2;
+            --primary-light: #9d4edd;
+            --secondary: #ff6b6b;
+            --dark: #333;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --border-radius: 12px;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Search Container */
+        .search-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--gray);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        /* Worker Cards */
+        .worker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .worker-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .worker-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .worker-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .worker-info {
+            padding: 1.5rem;
+        }
+        
+        .worker-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .worker-job {
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+        
+        .worker-area {
+            display: inline-block;
+            background: var(--light);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        
+        .worker-link {
+            display: block;
+            text-align: center;
+            padding: 0.75rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            transition: background 0.3s;
+        }
+        
+        .worker-link:hover {
+            background: var(--primary-light);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+            }
+            
+            .nav-links li {
+                margin: 0 0.75rem;
+            }
+            
+            .search-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .worker-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">MaidConnect</div>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="maid.html">Find Maids</a></li>
+                <li><a href="index.html">Join as Worker</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Search Container -->
+    <div class="container">
+        <div class="search-container">
+            <h2 class="section-title">Find Workers in Your Area</h2>
+            <p class="section-subtitle">Search for workers by area and job title</p>
+
+            <div class="form-group">
+                <label for="area-select">Select Area:</label>
+                <select id="area-select" class="form-control" onchange="searchWorkers()">
+                    <option value="">-- All Areas --</option>
+                    <option value="Mahaveer Nagar">Mahaveer Nagar</option>
+                    <option value="Saket">Saket</option>
+                    <option value="Vasant Vihar">Vasant Vihar</option>
+                    <option value="Dwarka">Dwarka</option>
+                    <option value="Karol Bagh">Karol Bagh</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="job-search">Search by Job Title:</label>
+                <input type="text" id="job-search" class="form-control" placeholder="e.g., Plumber, Electrician, Cook" oninput="searchWorkers()">
+            </div>
+
+            <!-- Worker Results -->
+            <div id="worker-results" class="worker-grid"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 MaidConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample data + data from localStorage
+        const sampleWorkers = [
+            { id: 101, name: "Raj Kumar", job_title: "Plumber", area: "Mahaveer Nagar", age: 35, experience: "8 years", contact: "111-222-3333", bio: "Expert plumber with experience in residential and commercial plumbing." },
+            { id: 102, name: "Amit Sharma", job_title: "Electrician", area: "Saket", age: 40, experience: "12 years", contact: "444-555-6666", bio: "Certified electrician specializing in home electrical systems." },
+            { id: 103, name: "Priya Singh", job_title: "Cook", area: "Vasant Vihar", age: 28, experience: "5 years", contact: "777-888-9999", bio: "Professional cook specializing in North Indian cuisine." },
+            { id: 104, name: "Sanjay Gupta", job_title: "Driver", area: "Dwarka", age: 45, experience: "15 years", contact: "123-456-7890", bio: "Experienced driver with knowledge of Delhi-NCR routes." }
+        ];
+
+        function getWorkers() {
+            // Get workers from localStorage (user-created profiles)
+            const userWorkers = JSON.parse(localStorage.getItem('workerProfiles')) || [];
+            
+            // Combine with sample data (avoid duplicates by ID)
+            const allWorkers = [...sampleWorkers];
+            userWorkers.forEach(userWorker => {
+                if (!allWorkers.find(w => w.id === userWorker.id)) {
+                    allWorkers.push(userWorker);
+                }
+            });
+            
+            return allWorkers;
+        }
+
+        function searchWorkers() {
+            const query = document.getElementById('job-search').value.toLowerCase();
+            const selectedArea = document.getElementById('area-select').value;
+            const resultsDiv = document.getElementById('worker-results');
+            resultsDiv.innerHTML = '';
+
+            const workers = getWorkers();
+            
+            const filteredWorkers = workers.filter(worker => {
+                const matchesArea = selectedArea ? worker.area === selectedArea : true;
+                const matchesJob = worker.job_title.toLowerCase().includes(query) || 
+                                  worker.name.toLowerCase().includes(query) ||
+                                  (worker.bio && worker.bio.toLowerCase().includes(query));
+                return matchesArea && matchesJob;
+            });
+
+            if (filteredWorkers.length > 0) {
+                filteredWorkers.forEach(worker => {
+                    const card = document.createElement('div');
+                    card.className = 'worker-card';
+                    card.innerHTML = `
+                        <div class="worker-image">
+                            ${worker.name.charAt(0)}
+                        </div>
+                        <div class="worker-info">
+                            <div class="worker-name">${worker.name}</div>
+                            <div class="worker-job">${worker.job_title}</div>
+                            <span class="worker-area">${worker.area}</span>
+                            <p>${worker.experience} experience</p>
+                        </div>
+                        <a href="worker_profile.html?id=${worker.id}" class="worker-link">View Profile</a>
+                    `;
+                    resultsDiv.appendChild(card);
+                });
+            } else {
+                resultsDiv.innerHTML = '<div class="no-results"><p>No workers found matching your criteria.</p></div>';
+            }
+        }
+
+        // Load workers on page load
+        window.onload = searchWorkers;
+    </script>
+</body>
+</html>

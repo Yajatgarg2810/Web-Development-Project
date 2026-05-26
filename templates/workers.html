@@ -1,0 +1,322 @@
+<!-- workers.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaidConnect - All Workers</title>
+    <style>
+        :root {
+            --primary: #8a2be2;
+            --primary-light: #9d4edd;
+            --secondary: #ff6b6b;
+            --dark: #333;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --border-radius: 12px;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .page-title {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-subtitle {
+            color: var(--gray);
+            font-size: 1.2rem;
+        }
+        
+        /* Worker Grid */
+        .worker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .worker-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .worker-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .worker-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .worker-info {
+            padding: 1.5rem;
+        }
+        
+        .worker-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .worker-job {
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+        
+        .worker-details {
+            margin: 1rem 0;
+        }
+        
+        .worker-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .worker-detail i {
+            margin-right: 0.5rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .worker-area {
+            display: inline-block;
+            background: var(--light);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        
+        .worker-link {
+            display: block;
+            text-align: center;
+            padding: 0.75rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            transition: background 0.3s;
+        }
+        
+        .worker-link:hover {
+            background: var(--primary-light);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray);
+            grid-column: 1 / -1;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+            }
+            
+            .nav-links li {
+                margin: 0 0.75rem;
+            }
+            
+            .worker-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">MaidConnect</div>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="search.html">Search Workers</a></li>
+                <li><a href="index.html">Join as Worker</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Our Trusted Workers</h1>
+            <p class="page-subtitle">Browse through our network of skilled professionals</p>
+        </div>
+
+        <!-- Worker Grid -->
+        <div id="worker-results" class="worker-grid"></div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 MaidConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample data + data from localStorage
+        const sampleWorkers = [
+            { id: 101, name: "Raj Kumar", job_title: "Plumber", area: "Mahaveer Nagar", age: 35, experience: "8 years", contact: "111-222-3333", bio: "Expert plumber with experience in residential and commercial plumbing." },
+            { id: 102, name: "Amit Sharma", job_title: "Electrician", area: "Saket", age: 40, experience: "12 years", contact: "444-555-6666", bio: "Certified electrician specializing in home electrical systems." },
+            { id: 103, name: "Priya Singh", job_title: "Cook", area: "Vasant Vihar", age: 28, experience: "5 years", contact: "777-888-9999", bio: "Professional cook specializing in North Indian cuisine." },
+            { id: 104, name: "Sanjay Gupta", job_title: "Driver", area: "Dwarka", age: 45, experience: "15 years", contact: "123-456-7890", bio: "Experienced driver with knowledge of Delhi-NCR routes." },
+            { id: 105, name: "Neha Patel", job_title: "Housekeeper", area: "Karol Bagh", age: 32, experience: "6 years", contact: "555-666-7777", bio: "Detail-oriented housekeeper with expertise in deep cleaning." },
+            { id: 106, name: "Vikram Joshi", job_title: "Carpenter", area: "Mahaveer Nagar", age: 38, experience: "10 years", contact: "888-999-0000", bio: "Skilled carpenter specializing in furniture and interior work." }
+        ];
+
+        function getWorkers() {
+            // Get workers from localStorage (user-created profiles)
+            const userWorkers = JSON.parse(localStorage.getItem('workerProfiles')) || [];
+            
+            // Combine with sample data (avoid duplicates by ID)
+            const allWorkers = [...sampleWorkers];
+            userWorkers.forEach(userWorker => {
+                if (!allWorkers.find(w => w.id === userWorker.id)) {
+                    allWorkers.push(userWorker);
+                }
+            });
+            
+            return allWorkers;
+        }
+
+        function displayWorkers() {
+            const resultsDiv = document.getElementById('worker-results');
+            resultsDiv.innerHTML = '';
+
+            const workers = getWorkers();
+
+            if (workers.length > 0) {
+                workers.forEach(worker => {
+                    const card = document.createElement('div');
+                    card.className = 'worker-card';
+                    card.innerHTML = `
+                        <div class="worker-image">
+                            ${worker.name.charAt(0)}
+                        </div>
+                        <div class="worker-info">
+                            <div class="worker-name">${worker.name}</div>
+                            <div class="worker-job">${worker.job_title}</div>
+                            <span class="worker-area">${worker.area}</span>
+                            
+                            <div class="worker-details">
+                                <div class="worker-detail">
+                                    <i>👤</i> ${worker.age} years old
+                                </div>
+                                <div class="worker-detail">
+                                    <i>💼</i> ${worker.experience} experience
+                                </div>
+                            </div>
+                        </div>
+                        <a href="worker_profile.html?id=${worker.id}" class="worker-link">View Profile</a>
+                    `;
+                    resultsDiv.appendChild(card);
+                });
+            } else {
+                resultsDiv.innerHTML = '<div class="no-results"><p>No workers available. Be the first to <a href="index.html">join our network</a>!</p></div>';
+            }
+        }
+
+        // Load workers on page load
+        window.onload = displayWorkers;
+    </script>
+</body>
+</html>

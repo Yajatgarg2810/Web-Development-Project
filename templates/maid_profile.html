@@ -1,0 +1,289 @@
+<!-- maid_profile.html - Maid Profile -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaidConnect - Maid Profile</title>
+    <style>
+        :root {
+            --primary: #8a2be2;
+            --primary-light: #9d4edd;
+            --secondary: #ff6b6b;
+            --dark: #333;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --border-radius: 12px;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Profile Container */
+        .profile-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 1rem;
+            border: 4px solid white;
+        }
+        
+        .profile-name {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-job {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .profile-details {
+            padding: 2rem;
+        }
+        
+        .detail-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .detail-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .back-button {
+            display: inline-block;
+            margin: 2rem 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: background 0.3s;
+        }
+        
+        .back-button:hover {
+            background: var(--primary-light);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+            }
+            
+            .nav-links li {
+                margin: 0 0.75rem;
+            }
+            
+            .profile-container {
+                margin: 1rem;
+            }
+            
+            .profile-header {
+                padding: 1.5rem;
+            }
+            
+            .profile-avatar {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
+            }
+            
+            .profile-name {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">MaidConnect</div>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="maid.html">Find Maids</a></li>
+                <li><a href="index.html">Join as Maid</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Profile Container -->
+    <div class="container">
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-avatar" id="profile-avatar">M</div>
+                <h1 class="profile-name" id="profile-name">Maid Name</h1>
+                <div class="profile-job" id="profile-job">Job Title</div>
+            </div>
+            
+            <div class="profile-details">
+                <div class="detail-item">
+                    <div class="detail-label">Area</div>
+                    <div id="profile-area">Area will appear here</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Age & Experience</div>
+                    <div id="profile-age-exp">Age and experience will appear here</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Contact Information</div>
+                    <div id="profile-contact">Contact information will appear here</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">About Me</div>
+                    <div id="profile-bio">Bio will appear here</div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="maid.html" class="back-button">Back to Search</a>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 MaidConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function getMaidProfile() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const maidId = parseInt(urlParams.get("id"), 10);
+
+            // Get maids from localStorage and sample data
+            const sampleMaids = [
+                { id: 1, name: "Emily Johnson", job: "Housekeeper", area: "Mahaveer Nagar", age: 29, experience: "5 years", contact: "123-456-7890", bio: "Experienced housekeeper with attention to detail. Specialize in deep cleaning and organization." },
+                { id: 2, name: "Fiona Smith", job: "Nanny", area: "Saket", age: 32, experience: "7 years", contact: "987-654-3210", bio: "Caring nanny with CPR certification. Love working with children of all ages." },
+                { id: 3, name: "Grace Williams", job: "Cleaner", area: "Vasant Vihar", age: 25, experience: "3 years", contact: "456-789-1230", bio: "Professional cleaner specializing in deep cleaning and eco-friendly products." },
+                { id: 4, name: "Hannah Brown", job: "Cook", area: "Dwarka", age: 40, experience: "15 years", contact: "321-654-9870", bio: "Expert cook specializing in Indian cuisine. Can prepare meals for special diets." }
+            ];
+            
+            const userMaids = JSON.parse(localStorage.getItem('maidProfiles')) || [];
+            const allMaids = [...sampleMaids, ...userMaids];
+            
+            const maid = allMaids.find(m => m.id === maidId);
+
+            if (maid) {
+                document.getElementById("profile-avatar").textContent = maid.name.charAt(0);
+                document.getElementById("profile-name").textContent = maid.name;
+                document.getElementById("profile-job").textContent = maid.job;
+                document.getElementById("profile-area").textContent = maid.area;
+                document.getElementById("profile-age-exp").textContent = `${maid.age} years old, ${maid.experience} experience`;
+                document.getElementById("profile-contact").textContent = maid.contact;
+                document.getElementById("profile-bio").textContent = maid.bio || "No bio provided.";
+            } else {
+                document.getElementById("profile-details").innerHTML = "<p>Maid profile not found.</p>";
+            }
+        }
+
+        getMaidProfile();
+    </script>
+</body>
+</html>

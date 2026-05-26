@@ -1,0 +1,459 @@
+<!-- templates/home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work in Need</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f9;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #0077cc;
+            color: #fff;
+            overflow-y: auto;
+            transition: left 0.3s ease;
+            padding-top: 1em;
+            z-index: 1000;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar .close-btn {
+            font-size: 1.5em;
+            color: #fff;
+            background: none;
+            border: none;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-menu li {
+            padding: 15px 20px;
+            border-bottom: 1px solid #005fa3;
+        }
+
+        .sidebar-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .sidebar-menu a:hover {
+            background-color: #005fa3;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em;
+            background-color: #0077cc;
+            color: #fff;
+        }
+
+        .navbar .menu-btn {
+            font-size: 1.5em;
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .navbar .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar .nav-links li {
+            margin: 0 15px;
+        }
+
+        .navbar .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #cce5ff;
+        }
+
+        /* Main Content */
+        #main-content {
+            padding-left: 0;
+            transition: padding-left 0.3s ease;
+        }
+
+        #main-content.sidebar-open {
+            padding-left: 250px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: #0077cc;
+            color: #fff;
+            text-align: center;
+            padding: 3em 1em;
+        }
+
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 1.5em;
+        }
+
+        .hero .button {
+            background-color: #ffcc00;
+            color: #333;
+            padding: 0.8em 2em;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero .button:hover {
+            background-color: #e6b800;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 3em 1em;
+            text-align: center;
+            background-color: #f4f7f9;
+        }
+
+        .about-section h2 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+
+        .about-section p {
+            font-size: 1.1em;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 3em 1em;
+            background-color: #e9ecef;
+        }
+
+        .services-section h2 {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 1.5em;
+        }
+
+        .services-section .service-cards {
+            display: flex;
+            gap: 1em;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .services-section .card {
+            background-color: #fff;
+            padding: 1.5em;
+            width: 280px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .services-section .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .services-section .card h3 {
+            font-size: 1.3em;
+            color: #0077cc;
+            margin-bottom: 0.5em;
+        }
+
+        .services-section .card p {
+            font-size: 1em;
+            color: #555;
+        }
+
+        /* Button Link Styling */
+        .services-section .button-link {
+            display: inline-block;
+            margin-top: 1em;
+            padding: 0.6em 1.2em;
+            background-color: #0077cc;
+            color: #fff;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .services-section .button-link:hover {
+            background-color: #005fa3;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 3em 1em;
+            text-align: center;
+            background-color: #f4f7f9;
+        }
+
+        .testimonials h2 {
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+
+        .testimonial-card {
+            background-color: #fff;
+            padding: 1.5em;
+            width: 80%;
+            max-width: 500px;
+            margin: 1em auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .testimonial-card p {
+            font-size: 1em;
+            color: #555;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1.5em;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #ffcc00;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .footer a:hover {
+            color: #e6b800;
+        }
+
+        /* Flash messages */
+        .flash-messages {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .flash-message {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            color: white;
+            opacity: 0.9;
+        }
+
+        .flash-success {
+            background-color: #4CAF50;
+        }
+
+        .flash-error {
+            background-color: #f44336;
+        }
+
+        .flash-info {
+            background-color: #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <button class="close-btn" id="close-sidebar">&times;</button>
+        <ul class="sidebar-menu">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('workers') }}">Workers</a></li>
+            <li><a href="{{ url_for('maid') }}">Maid</a></li>
+            <li><a href="{{ url_for('join') }}">Join</a></li>
+            {% if 'user' in session %}
+            <li><a href="{{ url_for('logout_confirmation') }}">Log Out</a></li>
+            {% else %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <!-- Page Content -->
+    <div id="main-content">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <button id="sidebar-toggle" class="menu-btn">☰</button>
+            <div class="logo">Our Service</div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('workers') }}">Workers</a></li>
+                <li><a href="{{ url_for('maid') }}">Maid</a></li>
+                <li><a href="{{ url_for('join') }}">Join</a></li>
+                {% if 'user' in session %}
+                <li><a href="{{ url_for('logout_confirmation') }}">Log Out</a></li>
+                {% else %}
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <!-- Flash messages -->
+        <div class="flash-messages">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Welcome to Our Service Platform</h1>
+            <p>Find trusted workers and maids effortlessly from the comfort of your home!</p>
+            <a href="#services" class="button">Explore Services</a>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <h2>About Us</h2>
+            <p>Our mission is to connect people with reliable workers for household services, making it easy and accessible to find the right help without the hassle of going from place to place.</p>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services-section">
+            <h2>Our Services</h2>
+            <div class="service-cards">
+                <div class="card">
+                    <h3>Household Work</h3>
+                    <p>Reliable workers for household tasks, from cleaning to repairs.</p>
+                    <a href="{{ url_for('workers') }}" class="button-link">Workers</a>
+                </div>
+                <div class="card">
+                    <h3>Maid Services</h3>
+                    <p>Trusted and skilled maids for daily chores and home care.</p>
+                    <a href="{{ url_for('maid') }}" class="button-link">Maids</a>
+                </div>
+                <div class="card">
+                    <h3>Join Our Network</h3>
+                    <p>Are you looking for work? Join us to connect with potential clients.</p>
+                    <a href="{{ url_for('join') }}" class="button-link">Join Now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <h2>What Our Users Say</h2>
+            <div class="testimonial-card">
+                <p>"Finding help has never been easier! This platform connected me with the perfect maid for my family's needs."</p>
+                <p><strong>- Sarah J.</strong></p>
+            </div>
+            <div class="testimonial-card">
+                <p>"I love being able to find workers without the usual stress. This service really changed my experience."</p>
+                <p><strong>- Mark L.</strong></p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2024 Our Service. All rights reserved.</p>
+                <p>Follow us on:
+                    <a href="#">Facebook</a> |
+                    <a href="#">Twitter</a> |
+                    <a href="#">Instagram</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const sidebar = document.getElementById("sidebar");
+            const sidebarToggle = document.getElementById("sidebar-toggle");
+            const closeSidebar = document.getElementById("close-sidebar");
+            const mainContent = document.getElementById("main-content");
+
+            sidebarToggle.addEventListener("click", () => {
+                sidebar.classList.add("open");
+                mainContent.classList.add("sidebar-open");
+            });
+
+            closeSidebar.addEventListener("click", () => {
+                sidebar.classList.remove("open");
+                mainContent.classList.remove("sidebar-open");
+            });
+
+            document.addEventListener("click", (event) => {
+                if (!sidebar.contains(event.target) && !sidebarToggle.contains(event.target)) {
+                    sidebar.classList.remove("open");
+                    mainContent.classList.remove("sidebar-open");
+                }
+            });
+
+            // Auto-hide flash messages after 5 seconds
+            setTimeout(() => {
+                const flashMessages = document.querySelectorAll('.flash-message');
+                flashMessages.forEach(message => {
+                    message.style.opacity = '0';
+                    setTimeout(() => message.remove(), 1000);
+                });
+            }, 5000);
+        });
+    </script>
+</body>
+</html>

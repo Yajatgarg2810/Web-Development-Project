@@ -1,0 +1,321 @@
+<!-- worker_profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaidConnect - Worker Profile</title>
+    <style>
+        :root {
+            --primary: #8a2be2;
+            --primary-light: #9d4edd;
+            --secondary: #ff6b6b;
+            --dark: #333;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --border-radius: 12px;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Profile Container */
+        .profile-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 1rem;
+            border: 4px solid white;
+        }
+        
+        .profile-name {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-job {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .profile-details {
+            padding: 2rem;
+        }
+        
+        .detail-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .detail-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .back-button {
+            display: inline-block;
+            margin: 2rem 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: background 0.3s;
+        }
+        
+        .back-button:hover {
+            background: var(--primary-light);
+        }
+        
+        /* Contact Button */
+        .contact-button {
+            display: inline-block;
+            margin: 1rem 0.5rem 0 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .contact-button:hover {
+            background: #ff5252;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+            }
+            
+            .nav-links li {
+                margin: 0 0.75rem;
+            }
+            
+            .profile-container {
+                margin: 1rem;
+            }
+            
+            .profile-header {
+                padding: 1.5rem;
+            }
+            
+            .profile-avatar {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
+            }
+            
+            .profile-name {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">MaidConnect</div>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="search.html">Find Workers</a></li>
+                <li><a href="index.html">Join as Worker</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Profile Container -->
+    <div class="container">
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-avatar" id="profile-avatar">W</div>
+                <h1 class="profile-name" id="profile-name">Worker Name</h1>
+                <div class="profile-job" id="profile-job">Job Title</div>
+            </div>
+            
+            <div class="profile-details">
+                <div class="detail-item">
+                    <div class="detail-label">Area</div>
+                    <div id="profile-area">Area will appear here</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Age & Experience</div>
+                    <div id="profile-age-exp">Age and experience will appear here</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Contact Information</div>
+                    <div id="profile-contact">Contact information will appear here</div>
+                    <button class="contact-button" onclick="showContact()">Show Contact</button>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">About Me</div>
+                    <div id="profile-bio">Bio will appear here</div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="search.html" class="back-button">Back to Search</a>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 MaidConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function getWorkerProfile() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const workerId = parseInt(urlParams.get("id"), 10);
+
+            // Get workers from localStorage and sample data
+            const sampleWorkers = [
+                { id: 101, name: "Raj Kumar", job_title: "Plumber", area: "Mahaveer Nagar", age: 35, experience: "8 years", contact: "111-222-3333", bio: "Expert plumber with experience in residential and commercial plumbing. Specialize in pipe repairs and installations." },
+                { id: 102, name: "Amit Sharma", job_title: "Electrician", area: "Saket", age: 40, experience: "12 years", contact: "444-555-6666", bio: "Certified electrician specializing in home electrical systems. Available for wiring, repairs, and installations." },
+                { id: 103, name: "Priya Singh", job_title: "Cook", area: "Vasant Vihar", age: 28, experience: "5 years", contact: "777-888-9999", bio: "Professional cook specializing in North Indian cuisine. Can prepare meals for special occasions and daily needs." },
+                { id: 104, name: "Sanjay Gupta", job_title: "Driver", area: "Dwarka", age: 45, experience: "15 years", contact: "123-456-7890", bio: "Experienced driver with knowledge of Delhi-NCR routes. Available for daily commutes and long-distance travel." }
+            ];
+            
+            const userWorkers = JSON.parse(localStorage.getItem('workerProfiles')) || [];
+            const allWorkers = [...sampleWorkers, ...userWorkers];
+            
+            const worker = allWorkers.find(w => w.id === workerId);
+
+            if (worker) {
+                document.getElementById("profile-avatar").textContent = worker.name.charAt(0);
+                document.getElementById("profile-name").textContent = worker.name;
+                document.getElementById("profile-job").textContent = worker.job_title;
+                document.getElementById("profile-area").textContent = worker.area;
+                document.getElementById("profile-age-exp").textContent = `${worker.age} years old, ${worker.experience} experience`;
+                document.getElementById("profile-contact").textContent = "Contact information hidden. Click 'Show Contact' to view.";
+                document.getElementById("profile-bio").textContent = worker.bio || "No bio provided.";
+                
+                // Store contact info for the showContact function
+                document.getElementById("profile-contact").dataset.contact = worker.contact;
+            } else {
+                document.getElementById("profile-details").innerHTML = "<p>Worker profile not found.</p>";
+            }
+        }
+
+        function showContact() {
+            const contactElement = document.getElementById("profile-contact");
+            const contactInfo = contactElement.dataset.contact;
+            contactElement.textContent = contactInfo;
+            
+            // Hide the button after showing contact
+            document.querySelector('.contact-button').style.display = 'none';
+        }
+
+        getWorkerProfile();
+    </script>
+</body>
+</html>

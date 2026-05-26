@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Reset & Base Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0077cc, #005fa3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Centered Container */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3em;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0px 4px 20px rgba(255, 255, 255, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        /* Welcome Back Text */
+        .welcome-back {
+            font-size: 2.8em;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+            margin-bottom: 0.5em;
+        }
+
+        /* Subtext */
+        .sub-text {
+            color: #f0f0f0;
+            font-size: 1.2em;
+            margin-bottom: 1.5em;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 1em;
+            font-weight: bold;
+            color: #fff;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 1em;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            margin-bottom: 1em;
+        }
+
+        /* Submit Button */
+        .submit-button {
+            background-color: #ffcc00;
+            color: #333;
+            padding: 1em;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #ffdb4d;
+        }
+
+        /* Extra Options */
+        .extra-options {
+            margin-top: 1.5em;
+            color: #f0f0f0;
+        }
+
+        .extra-options a {
+            color: #ffcc00;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .extra-options a:hover {
+            text-decoration: underline;
+        }
+
+        /* Flash messages */
+        .flash-messages {
+            margin-bottom: 1em;
+        }
+
+        .flash-message {
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .flash-success {
+            background-color: #4CAF50;
+        }
+
+        .flash-error {
+            background-color: #f44336;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .form-container {
+                width: 90%;
+                padding: 2em;
+            }
+
+            .welcome-back {
+                font-size: 2.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2 class="welcome-back">Welcome Back!</h2>
+            <p class="sub-text">Please log in to your account</p>
+            
+            <!-- Flash messages -->
+            <div class="flash-messages">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            
+            <form method="POST" action="{{ url_for('login') }}">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                
+                <button type="submit" class="submit-button">Log In</button>
+            </form>
+            <div class="extra-options">
+                <a href="{{ url_for('forgot_password') }}">Forgot Password?</a>
+                <a href="{{ url_for('create_account') }}">Create an Account</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

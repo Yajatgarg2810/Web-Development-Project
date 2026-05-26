@@ -1,0 +1,352 @@
+<!-- maid.html - Find Maids -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaidConnect - Find Maids</title>
+    <style>
+        :root {
+            --primary: #8a2be2;
+            --primary-light: #9d4edd;
+            --secondary: #ff6b6b;
+            --dark: #333;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --border-radius: 12px;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Search Container */
+        .search-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--gray);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        /* Maid Cards */
+        .maid-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .maid-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .maid-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .maid-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .maid-info {
+            padding: 1.5rem;
+        }
+        
+        .maid-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .maid-job {
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+        
+        .maid-area {
+            display: inline-block;
+            background: var(--light);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        
+        .maid-link {
+            display: block;
+            text-align: center;
+            padding: 0.75rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            transition: background 0.3s;
+        }
+        
+        .maid-link:hover {
+            background: var(--primary-light);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+            }
+            
+            .nav-links li {
+                margin: 0 0.75rem;
+            }
+            
+            .search-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .maid-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">MaidConnect</div>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="index.html">Join as Maid</a></li>
+                <li><a href="logout.html">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Search Container -->
+    <div class="container">
+        <div class="search-container">
+            <h2 class="section-title">Find Maids in Your Area</h2>
+            <p class="section-subtitle">Search for maids by area and job title</p>
+
+            <div class="form-group">
+                <label for="area-select">Select Area:</label>
+                <select id="area-select" class="form-control" onchange="searchMaids()">
+                    <option value="">-- All Areas --</option>
+                    <option value="Mahaveer Nagar">Mahaveer Nagar</option>
+                    <option value="Saket">Saket</option>
+                    <option value="Vasant Vihar">Vasant Vihar</option>
+                    <option value="Dwarka">Dwarka</option>
+                    <option value="Karol Bagh">Karol Bagh</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="maid-search">Search by Job Title:</label>
+                <input type="text" id="maid-search" class="form-control" placeholder="e.g., Housekeeper, Cook, Nanny" oninput="searchMaids()">
+            </div>
+
+            <!-- Maid Results -->
+            <div id="maid-results" class="maid-grid"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 MaidConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample data + data from localStorage
+        const sampleMaids = [
+            { id: 1, name: "Emily Johnson", job: "Housekeeper", area: "Mahaveer Nagar", age: 29, experience: "5 years", contact: "123-456-7890", bio: "Experienced housekeeper with attention to detail." },
+            { id: 2, name: "Fiona Smith", job: "Nanny", area: "Saket", age: 32, experience: "7 years", contact: "987-654-3210", bio: "Caring nanny with CPR certification." },
+            { id: 3, name: "Grace Williams", job: "Cleaner", area: "Vasant Vihar", age: 25, experience: "3 years", contact: "456-789-1230", bio: "Professional cleaner specializing in deep cleaning." },
+            { id: 4, name: "Hannah Brown", job: "Cook", area: "Dwarka", age: 40, experience: "15 years", contact: "321-654-9870", bio: "Expert cook specializing in Indian cuisine." }
+        ];
+
+        function getMaids() {
+            // Get maids from localStorage (user-created profiles)
+            const userMaids = JSON.parse(localStorage.getItem('maidProfiles')) || [];
+            
+            // Combine with sample data (avoid duplicates by ID)
+            const allMaids = [...sampleMaids];
+            userMaids.forEach(userMaid => {
+                if (!allMaids.find(m => m.id === userMaid.id)) {
+                    allMaids.push(userMaid);
+                }
+            });
+            
+            return allMaids;
+        }
+
+        function searchMaids() {
+            const query = document.getElementById('maid-search').value.toLowerCase();
+            const selectedArea = document.getElementById('area-select').value;
+            const resultsDiv = document.getElementById('maid-results');
+            resultsDiv.innerHTML = '';
+
+            const maids = getMaids();
+            
+            const filteredMaids = maids.filter(maid => {
+                const matchesArea = selectedArea ? maid.area === selectedArea : true;
+                const matchesJob = maid.job.toLowerCase().includes(query) || 
+                                  maid.name.toLowerCase().includes(query) ||
+                                  (maid.bio && maid.bio.toLowerCase().includes(query));
+                return matchesArea && matchesJob;
+            });
+
+            if (filteredMaids.length > 0) {
+                filteredMaids.forEach(maid => {
+                    const card = document.createElement('div');
+                    card.className = 'maid-card';
+                    card.innerHTML = `
+                        <div class="maid-image">
+                            ${maid.name.charAt(0)}
+                        </div>
+                        <div class="maid-info">
+                            <div class="maid-name">${maid.name}</div>
+                            <div class="maid-job">${maid.job}</div>
+                            <span class="maid-area">${maid.area}</span>
+                            <p>${maid.experience} experience</p>
+                        </div>
+                        <a href="maid_profile.html?id=${maid.id}" class="maid-link">View Profile</a>
+                    `;
+                    resultsDiv.appendChild(card);
+                });
+            } else {
+                resultsDiv.innerHTML = '<div class="no-results"><p>No maids found matching your criteria.</p></div>';
+            }
+        }
+
+        // Load maids on page load
+        window.onload = searchMaids;
+    </script>
+</body>
+</html>

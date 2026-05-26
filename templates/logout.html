@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaidConnect - Logout</title>
+    <style>
+        :root {
+            --primary: #8a2be2;
+            --primary-light: #9d4edd;
+            --secondary: #ff6b6b;
+            --dark: #333;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --border-radius: 12px;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Logout Container */
+        .logout-container {
+            max-width: 500px;
+            width: 90%;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            text-align: center;
+            margin: 2rem auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .logout-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            padding: 2rem;
+            color: white;
+        }
+        
+        .logout-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .logout-body {
+            padding: 2rem;
+        }
+        
+        .logout-message {
+            margin-bottom: 2rem;
+            color: var(--gray);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .logout-button {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .logout-button:hover {
+            background: #ff5252;
+        }
+        
+        .cancel-button {
+            background: #e9ecef;
+            color: var(--dark);
+        }
+        
+        .cancel-button:hover {
+            background: #dee2e6;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+            }
+            
+            .nav-links li {
+                margin: 0 0.75rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">MaidConnect</div>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="maid.html">Find Maids</a></li>
+                <li><a href="index.html">Join as Maid</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Logout Container -->
+    <div class="logout-container">
+        <div class="logout-header">
+            <div class="logout-icon">👋</div>
+            <h2>Logout</h2>
+        </div>
+        <div class="logout-body">
+            <p class="logout-message">Are you sure you want to log out? Your session will be closed, and you will be redirected to the login page.</p>
+            <div class="button-group">
+                <button onclick="logoutUser()" class="btn logout-button">Logout</button>
+                <button onclick="cancelLogout()" class="btn cancel-button">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="nav-container">
+            <p>&copy; 2024 MaidConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function logoutUser() {
+            // Clear any user data from storage
+            localStorage.removeItem("currentUser");
+            sessionStorage.clear();
+            
+            alert("You have been logged out successfully.");
+            window.location.href = "home.html"; // Redirect to home page
+        }
+
+        function cancelLogout() {
+            window.location.href = "maid.html"; // Redirect back to maid search
+        }
+    </script>
+</body>
+</html>
